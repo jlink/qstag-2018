@@ -1,5 +1,7 @@
 package qstag;
 
+import java.util.*;
+
 import org.junit.jupiter.api.*;
 
 import static java.util.Arrays.*;
@@ -9,6 +11,15 @@ class PrimeFactorizationTests {
 
 	@Test
 	void factorizingTwo() {
-		assertEquals(asList(2), Primes.factorize(2));
+		assertPrimeFactors(2, asList(2));
+	}
+
+	@Test
+	void factorizingFour() {
+		assertPrimeFactors(4, asList(2, 2));
+	}
+
+	private void assertPrimeFactors(int number, List<Integer> expected) {
+		assertEquals(expected, Primes.factorize(number));
 	}
 }

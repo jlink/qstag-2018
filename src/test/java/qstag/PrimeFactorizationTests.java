@@ -22,6 +22,11 @@ class PrimeFactorizationTests {
 		assertPrimeFactors(27, asList(3, 3, 3));
 	}
 
+	@Test
+	void factorizingMultiplesOf2and3() {
+		assertPrimeFactors(6, asList(2, 3));
+		assertPrimeFactors(108, asList(2, 2, 3, 3, 3));
+	}
 
 	private void assertPrimeFactors(int number, List<Integer> expected) {
 		assertEquals(expected, Primes.factorize(number));

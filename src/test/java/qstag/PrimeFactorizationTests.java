@@ -2,6 +2,7 @@ package qstag;
 
 import java.util.*;
 
+import net.jqwik.api.*;
 import org.junit.jupiter.api.*;
 
 import static java.util.Arrays.*;
@@ -41,5 +42,17 @@ class PrimeFactorizationTests {
 
 	private void assertPrimeFactors(int number, List<Integer> expected) {
 		assertEquals(expected, Primes.factorize(number));
+	}
+
+	@Property
+	void factorsOfMultipliedPrimesArePrimesThemselves(@ForAll("primes") List<Integer> primes) {
+		int product = primes.stream().reduce((left, right) -> left * right).get();
+		primes.sort(Integer::compareTo);
+		assertPrimeFactors(product, primes);
+	}
+
+	@Provide
+	Arbitrary<List<Integer>> primes() {
+		return Arbitraries.of(2,3,5,7,11,13,17,19,23).list().ofMinSize(1).ofMaxSize(7);
 	}
 }
